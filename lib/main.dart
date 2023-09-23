@@ -3,12 +3,19 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tech_task/presentation/components/base_view.dart';
+import 'package:tech_task/presentation/view_model/app_view_model.dart';
+import 'package:tech_task/routes/locator.dart';
+import 'package:tech_task/routes/routes.dart';
+import 'package:tech_task/services/navigation_service.dart';
 
 void main() async {
   runZonedGuarded(() async {
-
     ///initialize .env
     await dotenv.load(fileName: ".env");
+    ///setup dependency injector
+    dependenciesInjector();
 
     runApp(
       const MyApp(),
@@ -26,14 +33,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        //primarySwatch: Colors.blue,
+    return ScreenUtilInit(
+      designSize: const Size(375, 813),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        navigatorKey: getIt<NavigationService>().navigatorKey,
+        title: 'Klasha Test App',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          //primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        onGenerateRoute: AppRouter.generateRoute,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -58,7 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseView<AppViewModel>(
+        onModelReady: (model) {
+      model.getIngredients(context,
+              (error) => debugPrint("Error: $error"));
+    },
+    builder: (context, model, child) => Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -81,6 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-    );
+    ));
   }
 }
