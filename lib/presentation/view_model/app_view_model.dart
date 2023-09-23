@@ -55,5 +55,31 @@ class AppViewModel extends BaseViewModel {
     return null;
   }
 
+  Future<GetRecipesResponse?> getRecipes(
+      BuildContext context,
+      {
+        Function(String)? onError,
+      }) async {
+    try {
+      final loader = Loader(context);
+      setViewState(ViewState.loading);
+      loader.show();
+
+      var response =
+      await repository.getRecipes(["Ham", "Cheese", "Bread"]);
+      getRecipesResponse = response;
+
+      setViewState(ViewState.success);
+      loader.close();
+
+      return response;
+    } catch (error) {
+      setViewState(ViewState.error);
+      setError(error.toString());
+      onError!(errorMessage.toString());
+    }
+    return null;
+  }
+
 
 }

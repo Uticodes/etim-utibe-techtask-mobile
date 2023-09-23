@@ -75,8 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return BaseView<AppViewModel>(
         onModelReady: (model) {
-      model.getIngredients(context,
-              (error) => debugPrint("Error: $error"));
+      model.getRecipes(context,
+              onError: (error) => debugPrint("Error: $error"));
     },
     builder: (context, model, child) => Scaffold(
       appBar: AppBar(
