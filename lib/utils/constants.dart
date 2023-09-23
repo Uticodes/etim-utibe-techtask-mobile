@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../data/cache/sharedpreferences.dart';
 import '../routes/locator.dart';
 import '../services/navigation_service.dart';
 
 ///Global variables
 final NavigationService navigationService = getIt<NavigationService>();
+final SharedPreference sharedPreference = SharedPreference();
 
 class AppStrings {
   static String appName = 'Klasha Test App';
@@ -26,7 +28,7 @@ class Sized24Container extends StatelessWidget {
 }
 
 class AppImages {
-
+  static const String selectDate = "assets/images/ic_select_date.png";
 }
 
 class AppFontSizes {
