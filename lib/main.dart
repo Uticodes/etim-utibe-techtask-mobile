@@ -1,6 +1,25 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() => runApp(MyApp());
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+void main() async {
+  runZonedGuarded(() async {
+
+    ///initialize .env
+    await dotenv.load(fileName: ".env");
+
+    runApp(
+      const MyApp(),
+    );
+  }, (dynamic error, dynamic stack) {
+    if (kDebugMode) {
+      print(error);
+      print(stack);
+    }
+  });
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
