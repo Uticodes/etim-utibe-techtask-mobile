@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tech_task/utils/widget_extensions.dart';
 
+import '../../routes/routes.dart';
 import '../../theme/app_themes.dart';
 import '../../utils/app_text.dart';
 import '../../utils/constants.dart';
@@ -55,7 +56,7 @@ class _SelectLaunchDateState extends State<SelectLaunchDate> {
                 AppButton(
                   onPressed: () {
                     saveLunchDate();
-                    // navigationService.navigateTo(AppRoutes.ingredients);
+                    navigationService.navigateTo(AppRoutes.ingredients);
                   },
                   title: "Proceed",
                   enabled: true,

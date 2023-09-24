@@ -15,6 +15,10 @@ class AppViewModel extends BaseViewModel {
   GetIngredientsResponse? getIngredientsResponse;
   GetRecipesResponse? getRecipesResponse;
   String errorMessage = "";
+  List<String>? ingredients;
+  List<String> selectedIngredients = [];
+  List<String> selectedUseBy = [];
+  bool showFloatingBtn = false;
   ViewState _state = ViewState.idle;
 
   @override
@@ -80,6 +84,22 @@ class AppViewModel extends BaseViewModel {
     }
     return null;
   }
+
+void handleItemSelection(String? title, String? useBy, bool isSelected) {
+  if (isSelected) {
+    selectedIngredients.add(title.toString());
+    selectedUseBy.add(useBy.toString());
+  } else {
+    selectedIngredients.remove(title);
+    selectedUseBy.remove(useBy);
+  }
+  // Update showFloatingBtn based on whether selectedTitles is not empty
+  showFloatingBtn = selectedIngredients.isNotEmpty;
+  debugPrint("Selected title: ${selectedIngredients.join(", ")}");
+  debugPrint("Selected useBy: ${selectedUseBy.join(", ")}");
+
+  notifyListeners();
+}
 
 
 }

@@ -29,9 +29,13 @@ class Sized24Container extends StatelessWidget {
 
 class AppImages {
   static const String selectDate = "assets/images/ic_select_date.png";
+  static const String success = "assets/images/ic_success.png";
+  static const String errorIcon = "assets/images/ic_error.png";
+  static const String backBtn = "assets/images/ic_left_arrow.svg";
 }
 
 class AppFontSizes {
+  static double fontSize72 = 72.0;
   static double fontSize50 = 50.0;
   static double fontSize45 = 45.0;
   static double fontSize40 = 40.0;
