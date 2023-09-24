@@ -29,7 +29,9 @@ class _SelectLaunchDateState extends State<SelectLaunchDate> {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
+            padding: EdgeInsets.symmetric(
+                vertical: AppFontSizes.fontSize24,
+                horizontal: AppFontSizes.fontSize24),
             child: ListView(
               children: [
                 24.0.sbH,

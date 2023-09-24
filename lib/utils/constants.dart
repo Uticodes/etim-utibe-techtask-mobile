@@ -36,6 +36,7 @@ class AppImages {
 
 class AppFontSizes {
   static double fontSize72 = 72.0;
+  static double fontSize60 = 60.0;
   static double fontSize50 = 50.0;
   static double fontSize45 = 45.0;
   static double fontSize40 = 40.0;
