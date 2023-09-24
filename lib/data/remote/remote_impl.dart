@@ -6,7 +6,6 @@ import '../../domain/model/get_ingredients_model.dart';
 import '../core/network/NetworkService.dart';
 import '../core/network/urlPath.dart';
 
-
 /// This calls implements the UserRemote logic
 class AppRemoteImpl extends NetworkService implements AppRemote {
   final Dio dioClient;
