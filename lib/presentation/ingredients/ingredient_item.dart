@@ -33,8 +33,7 @@ class IngredientItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               vertical: AppFontSizes.fontSize8,
               horizontal: AppFontSizes.fontSize16),
-          height: 60,
-          //AppFontSizes.fontSize40,
+          height: AppFontSizes.fontSize60,
           width: context.getWidth(),
           decoration: ShapeDecoration(
             color: isSelected ? AppColors.jade : Colors.transparent,
