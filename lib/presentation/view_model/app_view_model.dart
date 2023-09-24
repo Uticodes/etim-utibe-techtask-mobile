@@ -81,6 +81,7 @@ class AppViewModel extends BaseViewModel {
       setViewState(ViewState.success);
       loader.close();
       onSuccess!(response);
+      clearSelectedIngredients();
 
       return response;
     } catch (error) {
@@ -137,5 +138,11 @@ class AppViewModel extends BaseViewModel {
     debugPrint("Lunch Date: $selectedLunchDate");
   }
 
+  /// Clear selected ingredients when "Get Recipes" is pressed
+  clearSelectedIngredients() {
+    selectedIngredients.clear();
+    selectedUseBy.clear();
+    showFloatingBtn = false;
+  }
 
 }
