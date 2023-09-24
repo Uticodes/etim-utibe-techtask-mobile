@@ -7,6 +7,8 @@ import '../../utils/constants.dart';
 import '../components/app_alert.dart';
 import '../components/base_view.dart';
 import '../components/custom_app_bar.dart';
+import '../components/loader.dart';
+import '../recipes/recipes.dart';
 import '../view_model/app_view_model.dart';
 import 'ingredient_item.dart';
 
@@ -90,7 +92,19 @@ class _IngredientsScreenState extends State<IngredientsScreen> {
             ? FloatingActionButton.extended(
                 backgroundColor: AppColors.jade,
                 onPressed: () {
-                  // handle get recipes
+                  model.getRecipes(context,
+                      onSuccess: (response) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RecipesScreen(
+                                  getRecipesResponse: response,
+                                )));
+                      },
+                      onError: (error) {
+                        Loader(context).close();
+                        AppAlert.show(context, message: error, success: false);
+                      });
                 },
                 label: SizedBox(
                   width: 100,
