@@ -62,6 +62,7 @@ class AppViewModel extends BaseViewModel {
   Future<GetRecipesResponse?> getRecipes(
       BuildContext context,
       {
+        Function(GetRecipesResponse)? onSuccess,
         Function(String)? onError,
       }) async {
     try {
@@ -75,6 +76,7 @@ class AppViewModel extends BaseViewModel {
 
       setViewState(ViewState.success);
       loader.close();
+      onSuccess!(response);
 
       return response;
     } catch (error) {
