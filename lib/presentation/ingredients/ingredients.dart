@@ -78,7 +78,8 @@ class _IngredientsScreenState extends State<IngredientsScreen> {
                               useBy: useBy,
                               isSelected: isSelected,
                               onItemSelect: (bool selected) {
-                                model.handleItemSelection(title, useBy, selected);
+                                model.handleItemSelection(
+                                    context, title, useBy, selected);
                               },
                             );
                           }),
