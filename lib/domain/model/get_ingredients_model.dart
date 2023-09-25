@@ -27,6 +27,13 @@ class Ingredient {
 
   Ingredient({required this.title, required this.useBy});
 
+  factory Ingredient.fromJson(Map<String, dynamic> json) {
+    return Ingredient(
+      title: json["title"],
+      useBy: json["use-by"],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       "title": title,

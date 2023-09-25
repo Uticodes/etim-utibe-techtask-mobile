@@ -38,44 +38,40 @@ class AppViewModel extends BaseViewModel {
   }
 
   Future<GetIngredientsResponse?> getIngredients(
-      BuildContext context,
-      Function(String) onError,
-      ) async {
+    BuildContext context, {
+    Function()? onSuccess,
+    Function(String)? onError,
+  }) async {
     try {
-      final loader = Loader(context);
       setViewState(ViewState.loading);
-      loader.show();
 
       var response = await repository.getIngredients();
       getIngredientsResponse = response;
 
       setViewState(ViewState.success);
-      getLaunchDate();
-
-      loader.close();
+      onSuccess!();
 
       return response;
     } catch (error) {
       setViewState(ViewState.error);
       setError(error.toString());
-      onError(errorMessage.toString());
+      onError!(errorMessage.toString());
     }
     return null;
   }
 
   Future<GetRecipesResponse?> getRecipes(
-      BuildContext context,
-      {
-        Function(GetRecipesResponse)? onSuccess,
-        Function(String)? onError,
-      }) async {
+    BuildContext context, {
+    Function(GetRecipesResponse)? onSuccess,
+    Function(String)? onError,
+  }) async {
     try {
       final loader = Loader(context);
       setViewState(ViewState.loading);
       loader.show();
 
       var response =
-      await repository.getRecipes(["Ham", "Cheese", "Bread"]);
+      await repository.getRecipes([selectedIngredients.join(", ")]);
       getRecipesResponse = response;
 
       setViewState(ViewState.success);
@@ -93,11 +89,7 @@ class AppViewModel extends BaseViewModel {
   }
 
   void handleItemSelection(
-      BuildContext context,
-      String? title,
-      String? useBy,
-      bool isSelected
-      ) {
+      BuildContext context, String? title, String? useBy, bool isSelected) {
     // Check if useBy date is not expired
     if (useBy != null && !isUseByExpired(useBy)) {
       if (isSelected) {
@@ -109,7 +101,8 @@ class AppViewModel extends BaseViewModel {
       }
     } else {
       // Display a message or handle the case where the useBy date is expired
-      AppAlert.show(context, message: "The ingredient is expired and cannot be selected.");
+      AppAlert.show(context,
+          message: "The ingredient is expired and cannot be selected.");
       debugPrint("The ingredient is expired and cannot be selected.");
     }
 
