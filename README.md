@@ -63,6 +63,7 @@ Run the app on an emulator/simulator or a connected device: Run ```flutter run``
 
 ## Screenshots:
 
+![lunch recipes screenshots](https://github.com/Uticodes/etim-utibe-techtask-mobile/assets/43546652/da3f952e-6da1-49c4-a4bf-9cb083bbfe7c)
 
 
 ## How to use the App:
